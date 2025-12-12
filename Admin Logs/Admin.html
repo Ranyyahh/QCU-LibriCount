@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>QCU LibriCount</title>
+  <link rel="stylesheet" href="Admin.css" />
+  <style>
+    :root{
+      --bg:#003F91;           
+      --top:#083d92;          
+      --pill-active:#0b63c8;  
+      --pill-inactive:#7e7e87;
+      --logo-blue:#0b4fb3;
+    }
+
+    *{box-sizing:border-box;}
+    body{
+      margin:0;
+      font-family: "Segoe UI", Roboto, Arial, sans-serif;
+      background:var(--bg);
+      color:white;
+    }
+
+    
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 20px;
+      padding-bottom: 0;
+      background: white;
+      color: #02369C;
+      min-height: 60px;
+      margin-top: 10px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .logo { width: 60px; height: auto; }
+
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-left: 10px;
+    }
+
+    .logo-wrap h1 { margin: 0; font-size: 24px; }
+
+    .Nav-bar { display: flex; gap: 0px; }
+
+    .Nav-bar ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      gap: 10px;
+    }
+
+    .Nav-bar li a {
+      cursor: pointer;
+      color: white;
+      text-decoration: none;
+      font-size: 2.5vw;
+      font-family: 'Poppins', sans-serif;
+      font-weight: bold;
+      display: inline-block;
+      padding: 15px 55px;
+      background-color: #777A8D;
+      border-radius: 29px 29px 0 0;
+      position: relative;
+      margin-left: 10px;
+      margin-right: -28px;
+      z-index: 1;
+      box-shadow: 5px 0 5px -3px rgba(0,0,0,0.3);
+      transition: background-color 0.3s ease;
+    }
+
+    .Nav-bar li a.active {
+      background-color: var(--pill-active);
+      color: white;
+    }
+
+    .Nav-bar a:hover { background-color: #02369C; }
+
+   
+    .container { padding: 30px 24px; max-width:1300px; margin:0 auto; }
+
+   
+    .card {
+      background: #003078;
+      border-radius: 20px;
+      padding: 20px;
+      border: 3px solid #1e5ac3;
+      margin-top: 20px;
+    }
+
+    
+    .logs-wrapper {
+      width: 95%;
+      max-width: 1200px;
+      margin: 30px auto;
+      padding: 30px;
+      border: 3px solid white;
+      border-radius: 30px;
+      max-height: 600px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .logs-title { text-align: center; font-size: 38px; margin-bottom: 10px; font-weight: bold; flex-shrink: 0; }
+    .logs-subtitle { text-align: center; margin-bottom: 30px; font-size: 16px; flex-shrink: 0; }
+
+    .logs-scroll-area { flex: 1; overflow-y: auto; background: transparent; padding-right: 10px; }
+
+    .logs-scroll-area::-webkit-scrollbar { width: 10px; }
+    .logs-scroll-area::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.12); border-radius: 10px; }
+    .logs-scroll-area::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.55); border-radius: 10px; border: 2px solid rgba(255,255,255,0.35); }
+    .logs-scroll-area::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.8); }
+
+    .log-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0px; border: 2px solid white; flex: 1; overflow: hidden; }
+    .log-header { background: white; color: #003F91; text-align: center; font-weight: bold; padding: 18px; font-size: 22px; border-bottom: 2px solid #003F91; }
+    .log-cell { padding: 18px; font-size: 20px; text-align: center; border-bottom: 1px solid white; border-right: 1px solid white; }
+    .row-blue { background: #0a3c87; }
+    .row-red { background: #b80000; }
+    .log-grid div:last-child { border-right: none; }
+
+    @media (max-width:900px){
+      .pill{ padding:12px 18px; font-size:16px; }
+      .nav-pills{ gap:8px; top:48%; }
+      .logs-wrapper{ padding:18px; }
+      .logs-title{ font-size:28px; }
+      .topbar{height:78px}
+    }
+  </style>
+</head>
+<body>
+
+
+  <header class="header">
+    <div class="logo-wrap">
+      <img src="Images/libricount-logo.png" class="logo">
+      <h1>QCU LibriCount</h1>
+    </div>
+
+    <div class="Nav-bar">
+      <nav>
+        <ul>
+          <li><a href="#dashboard">Dashboard</a></li>
+          <li><a href="#logs">Logs</a></li>
+          <li><a href="#settings">Settings</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  
+  <main class="container">
+    <section id="dashboard" class="page">
+      <h1 style="margin-top:6px;">Dashboard</h1>
+    </section>
+
+    <section id="logs" class="page">
+      <div class="logs-wrapper">
+        <div class="logs-title">Activity History</div>
+        <div class="logs-subtitle">[as of November 21, 2025]</div>
+        <div class="logs-scroll-area">
+          <div class="log-grid" aria-label="Activity history">
+            <div class="log-header">Type</div>
+            <div class="log-header">Action</div>
+            <div class="log-header">Time</div>
+
+            <div class="log-cell row-blue">+1 Entry</div>
+            <div class="log-cell row-blue">Time in (+1)</div>
+            <div class="log-cell row-blue">10:31 AM</div>
+
+            <div class="log-cell row-blue">+1 Entry</div>
+            <div class="log-cell row-blue">Time in (+1)</div>
+            <div class="log-cell row-blue">10:32 AM</div>
+
+            <div class="log-cell row-red">-1 Entry</div>
+            <div class="log-cell row-red">Time out (-1)</div>
+            <div class="log-cell row-red">10:35 AM</div>
+
+            <div class="log-cell row-blue">+1 Entry</div>
+            <div class="log-cell row-blue">Time in (+1)</div>
+            <div class="log-cell row-blue">10:37 AM</div>
+
+            <div class="log-cell row-red">-1 Entry</div>
+            <div class="log-cell row-red">Time out (-1)</div>
+            <div class="log-cell row-red">10:38 AM</div>
+
+            <div class="log-cell row-blue">+1 Entry</div>
+            <div class="log-cell row-blue">Time in (+1)</div>
+            <div class="log-cell row-blue">10:40 AM</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="settings" class="page">
+      <h1>Settings</h1>
+    </section>
+  </main>
+
+  <script>
+    const navLinks = document.querySelectorAll('.Nav-bar a');
+    const pages = document.querySelectorAll('.page');
+
+    function show(id){
+     
+      pages.forEach(s => s.style.display = 'none');
+   
+      const el = document.getElementById(id);
+      if(el) el.style.display = '';
+      
+      navLinks.forEach(link => link.classList.remove('active'));
+      const activeLink = document.querySelector(`.Nav-bar a[href="#${id}"]`);
+      if(activeLink) activeLink.classList.add('active');
+    }
+
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = link.getAttribute('href').substring(1);
+        show(target);
+      });
+    });
+
+    
+    show('dashboard');
+    
+const logCells = document.querySelectorAll('.log-grid');
+
+
+logCells.forEach(grid => {
+
+  const totalCells = grid.children.length;
+  for (let i = 0; i < totalCells; i += 3) {
+    const rowCells = [grid.children[i], grid.children[i+1], grid.children[i+2]];
+    rowCells.forEach(cell => {
+      cell.addEventListener('click', () => {
+        alert(`Row clicked: ${rowCells[0].textContent} | ${rowCells[1].textContent} | ${rowCells[2].textContent}`);
+      });
+    });
+  }
+});
+
+  </script>
+</body>
+</html>
