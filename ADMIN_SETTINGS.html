@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QCU LibriCount</title>
+
+    <link rel="stylesheet" href="ADMIN_SETTINGS.css">
+</head>
+
+<body>
+
+    <header class="header">
+    <div class="logo-wrap">
+        <img src="libricount-logo.png" class="logo">
+        <h1>QCU LibriCount</h1>
+    </div>
+
+    <div class="Nav-bar">
+            <nav>
+                <ul>
+                  <li><a href="ADMIN_DASHBOARD.html">Dashboard</a></li>
+                  <li><a href="ADMIN_LOGS.html">Logs</a></li>
+                  <li><a href="ADMIN_SETTINGS.html">Settings</a></li>
+                </ul>
+           </nav>
+        </div>
+</header>
+
+    <div class="container">
+
+        <div class="card">
+            <h2>System Configuration</h2>
+
+            <label class="label">Max Capacity:</label>
+            <input type="text" id="maxCapInput" value="50" class="input-box">
+
+            <div class="btn-group">
+                <button class="btn btn-gray" id="editBtn">Edit</button>
+                <button class="btn btn-red" id="saveBtn">Save</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>About</h2>
+            <p>
+                Quezon City University <br>
+                Library Capacity Monitoring System v1.0
+            </p>
+
+            <p class="italic">
+                Developed by SBIT – 2D <br>
+                Elevator Etiquette Group
+            </p>
+
+            <button class="btn btn-red logout">Log out</button>
+        </div>
+
+        <!-- Reset Tools -->
+        <div class="card">
+            <h2>Reset Tools</h2>
+
+            <div class="btn-group">
+                <button class="btn btn-gray" id="resetBtn">Reset Count</button>
+                <button class="btn btn-red" id="clearLogsBtn">Clear Logs</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>System Status</h2>
+        <br>
+            <p>Current Count: <b>48/50</b><br>
+            Last Sync: <b>10:31 AM</b>
+        </p>
+        </div>
+
+    </div>
+
+    <script src="ADMIN_SETTINGS.js"></script>
+</body>
+</html>

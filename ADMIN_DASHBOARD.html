@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QCU LibriCount</title>
+    <link rel="stylesheet" href="ADMIN_DASHBOARD.css">
+</head>
+<body>
+
+  <header class="header">
+    <div class="logo-wrap">
+        <img src="libricount-logo.png" class="logo">
+        <h1>QCU LibriCount</h1>
+    </div>
+
+    <div class="Nav-bar">
+            <nav>
+                <ul>
+                  <li><a href="ADMIN_DASHBOARD.html">Dashboard</a></li>
+                  <li><a href="ADMIN_LOGS.html">Logs</a></li>
+                  <li><a href="ADMIN_SETTINGS.html">Settings</a></li>
+                </ul>
+           </nav>
+        </div>
+</header>
+
+<main class="grid">
+
+    <!-- STATUS + GAUGE -->
+    <section class="card status">
+        <h2 class="status-title">Library Crowd Status</h2>
+
+        <div class="gauge-wrapper">
+            <div class="gauge-container">
+        <!-- Outer colored gauge -->
+        <svg class="gauge" viewBox="0 0 36 36">
+        <path class="bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+        <path class="meter" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" stroke-dasharray="70,100"/>
+        </svg>
+
+        <!-- Inner solid white circle -->
+        <div class="inner-circle"></div>
+
+        <!-- Status text -->
+        <div class="gauge-text">
+            <p id="status">NORMAL</p>
+    </div>
+</div>
+
+            <div class="percent-container">
+                <p id="percent">0%</p>
+                <span>Indicator</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- CURRENT COUNT -->
+    <section class="card count">
+        <h2 class="count-title">Current Count</h2>
+        <div class="count-wrap">
+            <div class="icon-person">
+                <div class="head"></div>
+                <div class="body"></div>
+            </div>
+            <p id="countNum">0/0</p>
+        </div>
+    </section>
+    <!-- RECENT ACTIVITY -->
+    <section class="card activity">
+        <h2 class="activity-title">Recent Activity <small id="dateLabel"></small></h2>
+        <div id="activityList"></div>
+    </section>
+
+</main>
+
+<script src="ADMIN_DASHBOARD.js"></script>
+</body>
+</html>

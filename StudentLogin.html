@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QCU LibriCount</title>
+
+    <link rel="stylesheet" href="StudentLogin.css">
+</head>
+<body>
+
+    <div class="white-bars left"></div>
+    <div class="white-bars right"></div>
+
+    <header>
+        <div class="logo-left">
+            <img src="libricount-logo.png" alt="Libricount Logo">
+        </div>
+        <div class="header-title">
+            <h1>Quezon City University Library</h1>
+        </div>
+        <div class="logo-right">
+            <img src="qcu-logo  .png" alt="QCU Logo">
+        </div>
+    </header>
+
+    <main>
+        <h2 class="page-title">USER ACCESS FORM</h2>
+
+        <div class="form-container">
+            <form id="accessForm">
+                
+                <div class="form-group">
+                    <label for="studentNo">Student No. <span>:</span></label>
+                    <input type="text" id="studentNo" name="studentNo" autocomplete="off">
+                </div>
+
+                <div class="form-group">
+                    <label for="lastName">Last Name <span>:</span></label>
+                    <input type="text" id="lastName" name="lastName" autocomplete="off">
+                </div>
+
+                <div class="form-group">
+                    <label for="firstName">First Name <span>:</span></label>
+                    <input type="text" id="firstName" name="firstName" autocomplete="off">
+                </div>
+
+                <div class="form-group">
+                    <label for="middleName">Middle Name <span>:</span></label>
+                    <input type="text" id="middleName" name="middleName" autocomplete="off">
+                </div>
+
+            </form>
+        </div>
+
+        <div class="button-group">
+            <button type="button" class="btn-time-in" onclick="handleTimeIn()">Time in</button>
+            <button type="button" class="btn-time-out" onclick="handleTimeOut()">Time out</button>
+        </div>
+    </main>
+
+    <script src="StudentLogin.js"></script>
+</body>
+</html>

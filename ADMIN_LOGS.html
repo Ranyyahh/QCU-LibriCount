@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>QCU LibriCount</title>
+  <link rel="stylesheet" href="ADMIN_LOGS.css" />
+</head>
+<body>
+
+  <!-- ================= HEADER (Same as Admin Dashboard) ================= -->
+  <header class="header">
+    <div class="logo-wrap">
+        <img src="libricount-logo.png" class="logo">
+        <h1>QCU LibriCount</h1>
+    </div>
+
+    <div class="Nav-bar">
+            <nav>
+                <ul>
+                  <li><a href="ADMIN_DASHBOARD.html">Dashboard</a></li>
+                  <li><a href="ADMIN_LOGS.html">Logs</a></li>
+                  <li><a href="ADMIN_SETTINGS.html">Settings</a></li>
+                </ul>
+           </nav>
+        </div>
+</header>
+
+
+  <!-- ================= LOGS PAGE ================= -->
+  <main class="container">
+    <div class="logs-wrapper">
+      <div class="logs-title">Activity History</div>
+      <div class="logs-subtitle" id="dateLabel">[as of ...]</div>
+      <div class="logs-scroll-area">
+        <div class="log-grid" aria-label="Activity history">
+          <div class="log-header">Type</div>
+          <div class="log-header">Action</div>
+          <div class="log-header">Time</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="ADMIN_LOGS.JS"></script>
+</body>
+</html>
