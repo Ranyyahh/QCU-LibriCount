@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="AdminLogin.css">
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Admin Log In</title>
+        
+    </head>
+    <body>
+
+<header class="header">
+    <div class="logo-wrap">
+        <img src="Images/libricount-logo.png" class="logo">
+        <h1>QCU LibriCount</h1>
+    </div>
+
+    <div class="Nav-bar">
+            <nav>
+                <ul>
+                  <li><a href="#">Dashboard</a></li>
+                  <li><a href="#">Logs</a></li>
+                  <li><a href="#">Settings</a></li>
+                </ul>
+           </nav>
+        </div>
+</header>
+
+
+        <!--login section-->
+        <section class="admin-login-form">
+            <img src="Images/admin-logo.png" alt="login-logo" class="admin-logo">
+
+            <form action="" method="post">
+               <div class="input-wrapper">
+                <img src="Images/username-logo.png" alt="username-logo" class="input-icon">
+                <input type="text" id="username" name="username" required placeholder="Email"><br><br>
+                </div> 
+
+                <div class="input-wrapper password-wrapper">
+                <img src="Images/password-logo.png" alt="password-logo" class="input-icon">
+                <input type="password" id="password" name="password" required placeholder="Password"><br><br>
+                <span id="togglePassword" class="eye">Show</span>
+                </div>
+
+                <div>
+                    <button type="submit" class="login-btn">Login</button>
+                </div>
+
+            </form>
+        </section>
+
+
+        <!--javascript-->
+        <script src="admin-login.js"></script>
+    </body>
+</html>
