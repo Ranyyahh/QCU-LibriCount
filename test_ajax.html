@@ -1,0 +1,39 @@
+<!-- test_ajax.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test AJAX</title>
+</head>
+<body>
+    <h1>Test AJAX to Adminfunction.php</h1>
+    
+    <button onclick="testUpdate()">Test Update Capacity to 75</button>
+    
+    <div id="result"></div>
+    
+    <script>
+    async function testUpdate() {
+        const formData = new FormData();
+        formData.append('action', 'update_capacity');
+        formData.append('max_capacity', '75');
+        
+        try {
+            const response = await fetch('Adminfunction.php', {
+                method: 'POST',
+                body: formData
+            });
+            
+            const result = await response.text();
+            document.getElementById('result').innerHTML = 
+                '<h3>Response:</h3><pre>' + result + '</pre>';
+            
+            console.log('Response:', result);
+        } catch (error) {
+            document.getElementById('result').innerHTML = 
+                '<h3>Error:</h3><pre>' + error + '</pre>';
+            console.error('Error:', error);
+        }
+    }
+    </script>
+</body>
+</html>

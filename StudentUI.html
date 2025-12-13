@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QCU LibriCount</title>
+
+    <!-- Link to CSS file -->
+    <link rel="stylesheet" href="StudentUI.css">
+</head>
+<body>
+
+    <!-- ===========================
+         HEADER SECTION
+         =========================== -->
+    <header>
+        <div class="logo-left">
+            <img src="Images/libricount-logo.png" alt="Libricount Logo">
+        </div>
+        <div class="header-title">
+            <h1>Quezon City University Library</h1>
+        </div>
+        <div class="logo-right">
+            <img src="Images/qcu-logo.png" alt="QCU Logo">
+        </div>
+    </header>
+
+    <!-- ===========================
+         DATE / TIME BAR
+         =========================== -->
+  <section class="datetime-section">
+  <div class="datetime-wrapper">
+     <div class="bar1"></div>
+    <h2 id="datetime">Loading date & time...</h2>
+    <div class="bar"></div>
+  </div>
+</section>
+
+
+    <!-- ===========================
+         MAIN CONTENT
+         =========================== -->
+    <main class="content">
+
+        <!-- LEFT CARD -->
+        <div class="card">
+            <h3 class="title">Library Crowd Status</h3>
+
+            <div class="gauge-wrapper">
+
+                <!-- Gauge + Centered Status -->
+                <div class="gauge-container">
+                    <svg class="gauge" viewBox="0 0 36 36">
+                        <path class="bg"
+                            d="M18 2.0845
+                            a 15.9155 15.9155 0 0 1 0 31.831
+                            a 15.9155 15.9155 0 0 1 0 -31.831" />
+
+                        <path class="meter"
+                            stroke-dasharray="30, 100"
+                            d="M18 2.0845
+                            a 15.9155 15.9155 0 0 1 0 31.831
+                            a 15.9155 15.9155 0 0 1 0 -31.831" />
+                    </svg>
+
+                    <div class="inner-circle"></div>
+
+                    <!-- Dynamic Status INSIDE Gauge -->
+                    <div class="gauge-center-text">
+                        <p class="status">NORMAL</p>
+                    </div>
+                </div>
+
+                <!-- Right side text -->
+                <div class="gauge-text">
+                    <p class="percent">30%</p>
+                    <span class="indicator">Indicator</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT CARD -->
+        <div class="card">
+            <h3 class="title">Current Count</h3>
+
+            <div class="icon-person">
+                <div class="head"></div>
+                <div class="body"></div>
+            </div>
+
+            <p class="count">15/50</p>
+        </div>
+
+    </main>
+
+    <!-- ===========================
+         FOOTER
+         =========================== -->
+    <footer>
+        <p>
+        Quezon City University &nbsp;&nbsp;|&nbsp;&nbsp;
+        Library Capacity Monitoring System v1.0 &nbsp;&nbsp;|&nbsp;&nbsp;
+        SBIT – 2D Elevator Etiquette
+        </p>
+    </footer>
+
+    <!-- Link JS -->
+    <script src="StudentUI.js"></script>
+
+</body>
+</html>
