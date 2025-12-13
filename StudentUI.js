@@ -1,7 +1,6 @@
 /* =======================================
    DYNAMIC GAUGE + STATUS FUNCTION
    ======================================= */
-
 function updateGauge(percent, current, max) {
 
     // Update % text
@@ -70,13 +69,31 @@ function updateDateTime() {
 updateDateTime();
 setInterval(updateDateTime, 1000);
 
-
 /* =======================================
-   INITIAL RUN (change anytime)
+   REAL-TIME CROWD DATA
    ======================================= */
 
-let current = 0; // people inside
-let max = 50;
-let percent = Math.round((current / max) * 100);
+async function fetchCrowdData() {
+    try {
+        const response = await fetch('get_real_time_data.php?t=' + new Date().getTime());
+        const data = await response.json();
 
-updateGauge(percent, current, max);
+        if (data.success) {
+            const current = data.current;
+            const max = data.max;
+            const percent = Math.round((current / max) * 100);
+
+            updateGauge(percent, current, max);
+        } else {
+            console.error("API error:", data);
+        }
+    } catch (err) {
+        console.error("Failed to fetch real-time data:", err);
+    }
+}
+
+// Initial fetch
+fetchCrowdData();
+
+// Update every 3 seconds
+setInterval(fetchCrowdData, 3000);

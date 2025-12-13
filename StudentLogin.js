@@ -1,57 +1,76 @@
-function getCurrentTime() {
-    const now = new Date();
-    let hours = now.getHours();
-    let minutes = now.getMinutes();
+// ==============================
+// Fetch student info when typing
+// ==============================
+const studentNoInput = document.getElementById("studentNo");
 
-    const ampm = hours >= 12 ? "PM" : "AM";
-
-    hours = hours % 12;
-    hours = hours ? hours : 12; 
-    
-    minutes = minutes < 10 ? "0" + minutes : minutes;
-
-    return `${hours}:${minutes} ${ampm}`;
-}
-
-function handleTimeIn() {
-    const studentNo = document.getElementById('studentNo').value.trim();
-    const lastName = document.getElementById('lastName').value.trim();
-    const firstName = document.getElementById('firstName').value.trim();
-
-    if (studentNo === "" || lastName === "" || firstName === "") {
-        alert("Please fill in the required fields.");
+studentNoInput.addEventListener("input", async () => {
+    const studentNo = studentNoInput.value.trim();
+    if (studentNo.length === 0) {
+        clearStudentFields();
         return;
     }
 
-    const time = getCurrentTime();
+    try {
+        const res = await fetch(`getStudent.php?studentNo=${encodeURIComponent(studentNo)}`);
+        const data = await res.json();
 
-    console.log("Time In Clicked");
-    console.log(`Student: ${studentNo}, Name: ${firstName} ${lastName}, Time In: ${time}`);
+        if (data.error) {
+            clearStudentFields();
+        } else {
+            document.getElementById("firstName").value = data.firstName;
+            document.getElementById("middleName").value = data.middleName;
+            document.getElementById("lastName").value = data.lastName;
+            document.getElementById("course").value = data.course;
+            document.getElementById("yearLvl").value = data.yearLvl;
+        }
+    } catch (err) {
+        console.error(err);
+    }
+});
 
-    alert(`Success! Time IN recorded for Student No: ${studentNo}\nTime: ${time}`);
-    
-    // Optional: Reset the form
-    document.getElementById('accessForm').reset();
-
-    // Redirect to StudentUI.html
-    window.location.href = "StudentUI.html";
+function clearStudentFields() {
+    document.getElementById("firstName").value = "";
+    document.getElementById("middleName").value = "";
+    document.getElementById("lastName").value = "";
+    document.getElementById("course").value = "";
+    document.getElementById("yearLvl").value = "";
 }
 
+// ==============================
+// Handle Time In / Time Out
+// ==============================
+function handleTimeIn() {
+    recordAttendance("timein");
+}
 
 function handleTimeOut() {
-    const studentNo = document.getElementById('studentNo').value.trim();
+    recordAttendance("timeout");
+}
 
+function recordAttendance(action) {
+    const studentNo = studentNoInput.value.trim();
     if (studentNo === "") {
-        alert("Please enter Student No. to Time Out.");
+        alert("Please enter Student No.");
         return;
     }
 
-    const time = getCurrentTime();
+    const formData = new FormData();
+    formData.append("studentNo", studentNo);
+    formData.append("action", action);
 
-    console.log("Time Out Clicked");
-    console.log(`Student No: ${studentNo}, Time Out: ${time}`);
-
-    alert(`Success! Time OUT recorded for Student No: ${studentNo}\nTime: ${time}`);
-    
-    document.getElementById('accessForm').reset();
+    fetch("Studentfunction.php", {
+        method: "POST",
+        body: formData
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.success) {
+            alert(data.message);
+            document.getElementById("accessForm").reset();
+            clearStudentFields();
+        } else {
+            alert(data.error);
+        }
+    })
+    .catch(err => console.error(err));
 }
