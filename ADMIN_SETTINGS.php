@@ -233,83 +233,92 @@ try {
     </header>
 
     <div class="container">
-  
-        <div class="card">
-            <h2>System Configuration</h2>
-            <form method="POST" action="">
-                <label class="label">Max Capacity:</label>
-                <input type="number" id="maxCapInput" name="max_capacity" 
-                       value="<?php echo htmlspecialchars($max_capacity); ?>" 
-                       min="1" max="500" class="input-box" disabled>
-                <div class="btn-groupCRUD">
-                    <button type="button" id="editBtn" class="btn btn-gray">Edit</button>
-                    <button type="submit" id="Savebttn" name="update_capacity" class="btn btn-red" disabled>Save</button>
-                </div>
-            </form>
-        </div>
-
-    
-        <div class="card">
-            <h2>System Status</h2>
-            <div class="status-info">
-                <p>Current Count: <b>
-                    <span id="currentCount"><?php echo htmlspecialchars($current_count); ?></span> /
-                    <span id="maxCapacity"><?php echo htmlspecialchars($max_capacity); ?></span>
-                </b></p>
-                <div class="progress-bar">
-                    <div class="progress-fill" id="progressFill" 
-                         style="width: <?php echo $percentage; ?>%; 
-                         background: <?php 
-                            if ($percentage >= 90) echo 'linear-gradient(135deg, #dc3545 0%, #c82333 100%)';
-                            elseif ($percentage >= 70) echo 'linear-gradient(135deg, #ffc107 0%, #e0a800 100%)';
-                            else echo 'linear-gradient(135deg, #28a745 0%, #218838 100%)';
-                         ?>;">
+        <!-- LEFT COLUMN - Stacked vertically -->
+        <div class="left-column">
+            <!-- System Configuration (top-left) -->
+            <div class="card">
+                <h2>System Configuration</h2>
+                <form method="POST" action="">
+                    <label class="label">Max Capacity:</label>
+                    <input type="number" id="maxCapInput" name="max_capacity" 
+                           value="<?php echo htmlspecialchars($max_capacity); ?>" 
+                           min="1" max="500" class="input-box" disabled>
+                    <div class="btn-groupCRUD">
+                        <button type="button" id="editBtn" class="btn btn-gray">Edit</button>
+                        <button type="submit" id="Savebttn" name="update_capacity" class="btn btn-red" disabled>Save</button>
                     </div>
+                </form>
+            </div>
+
+            <!-- Reset Tools (center-left below system configuration) -->
+            <div class="card">
+                <h2>Reset Tools</h2>
+                <form method="POST" action="" onsubmit="return confirmAction(this)">
+                    <div class="btn-group">
+                        <button type="submit" name="reset_count" class="btn btn-gray">Reset Count</button>
+                        <button type="submit" name="clear_logs" class="btn btn-red">Clear Logs</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- System Status (bottom-left below Reset Tools) -->
+            <div class="card">
+                <h2>System Status</h2>
+                <div class="status-info">
+                    <p>Current Count: <b>
+                        <span id="currentCount"><?php echo htmlspecialchars($current_count); ?></span> /
+                        <span id="maxCapacity"><?php echo htmlspecialchars($max_capacity); ?></span>
+                    </b></p>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill" 
+                             style="width: <?php echo $percentage; ?>%; 
+                             background: <?php 
+                                if ($percentage >= 90) echo 'linear-gradient(135deg, #dc3545 0%, #c82333 100%)';
+                                elseif ($percentage >= 70) echo 'linear-gradient(135deg, #ffc107 0%, #e0a800 100%)';
+                                else echo 'linear-gradient(135deg, #28a745 0%, #218838 100%)';
+                             ?>;">
+                        </div>
+                    </div>
+                    <p id="datetime"><?php 
+                        date_default_timezone_set('Asia/Manila');
+                        echo "As of " . date("F j, Y \a\\t g:i:s A"); 
+                    ?></p>
+                    <p>Status: <span id="systemStatus" style="color: <?php
+                        if ($percentage >= 90) echo '#dc3545';
+                        elseif ($percentage >= 70) echo '#ffc107';
+                        else echo '#28a745';
+                    ?>;">
+                        <?php 
+                        if ($percentage >= 90) echo '🔴 Wala na tuloy space, bobo ka kasi eh';
+                        elseif ($percentage >= 70) echo '🟡 Malapit na mapuno, bawasan mo na sila HAHAHAHAH';
+                        else echo '🟢 Daming space ya';
+                        ?>
+                    </span></p>
                 </div>
-                <p id="datetime"><?php 
-                    date_default_timezone_set('Asia/Manila');
-                    echo "As of " . date("F j, Y \a\\t g:i:s A"); 
-                ?></p>
-                <p>Status: <span id="systemStatus" style="color: <?php
-                    if ($percentage >= 90) echo '#dc3545';
-                    elseif ($percentage >= 70) echo '#ffc107';
-                    else echo '#28a745';
-                ?>;">
-                    <?php 
-                    if ($percentage >= 90) echo '🔴 Wala na tuloy space, bobo ka kasi eh';
-                    elseif ($percentage >= 70) echo '🟡 Malapit na mapuno, bawasan mo na sila HAHAHAHAH';
-                    else echo '🟢 Daming space ya';
-                    ?>
-                </span></p>
             </div>
         </div>
 
-        <div class="card2">
-            <h2>Reset Tools</h2>
-            <form method="POST" action="" onsubmit="return confirmAction(this)">
-                <div class="btn-group">
-                    <button type="submit" name="reset_count" class="btn btn-gray">Reset Count</button>
-                    <button type="submit" name="clear_logs" class="btn btn-red">Clear Logs</button>
-                </div>
-            </form>
-        </div>
-
-        <div class="card">
-            <h2>About</h2>
-            <p>
-                Quezon City University <br>
-                Library Capacity Monitoring System v1.0
-            </p>
-            <p class="italic">
-                Developed by SBIT – 2D <br>
-                Elevator Etiquette Group
-            </p>
-            <form method="POST" action="logout.php" onsubmit="return confirm('Are you sure you want to log out?')">
-                <button type="submit" class="btn btn-red logout">Log out</button>
-            </form>
+        
+        <div class="right-column">
+            <div class="card">
+                <h2>About</h2>
+                <p>
+                    Quezon City University <br>
+                    Library Capacity Monitoring System v1.0
+                </p>
+                <p class="italic">
+                    Developed by SBIT – 2D <br>
+                    Elevator Etiquette Group
+                </p>
+             
+            </div>
+                    <form method="POST" action="logout.php" onsubmit="return confirm('Are you sure you want to log out?')" class="logout-button-container">
+            <button type="submit" class="btn btn-red logout">Log out</button>
+        </form>
         </div>
     </div>
 
+    
     <script>
         //confirmation noitf lang naman ito
     function confirmAction(form) {
