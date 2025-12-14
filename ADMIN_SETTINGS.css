@@ -187,6 +187,11 @@ box-shadow: 5px 0 5px -3px rgba(0,0,0,0.3);
     margin-bottom: 0px;
 }
 
+.left-column .card:last-child h2 {
+    margin-top: 10px; /* More space below this specific heading */
+    font-size: 38px; /* Larger font for emphasis */
+    margin-bottom: 5px;
+}
 /* INPUT */
 .input-box {
     background: #000;
@@ -306,4 +311,30 @@ box-shadow: 5px 0 5px -3px rgba(0,0,0,0.3);
     color: white !important;
     font-weight: bold !important;
   
+}
+
+/* System Status section spacing */
+.status-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; 
+}
+
+
+.status-info p {
+    margin: 8px 0; 
+}
+
+
+.status-info p:first-child {
+    margin-bottom: 1px; 
+}
+
+.status-info p:nth-child(3) {
+    margin-top: -25px; 
+    margin-bottom: 10px; 
+}
+
+.status-info p:nth-child(4) {
+    margin-top: -15px; 
 }
