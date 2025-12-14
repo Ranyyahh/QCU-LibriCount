@@ -85,7 +85,7 @@ if (empty($studentNo)) {
             if ($checkResult->num_rows > 0) {
                 // DOUBLE TIME IN ATTEMPT
                 $responseList->addNode([
-                    'error' => 'ANO DALAWA KATAWAN MO????? TIME IN KA NA NASA LOOB KA PA???'
+                    'error' => 'You are already inside the library. Please time out before timing in again.'
                 ]);
             } else {
                 // wala pang time in, pwede mag time in
@@ -118,7 +118,7 @@ if (empty($studentNo)) {
             if ($checkResult->num_rows === 0) {
                 // HOY MAG TIME IN KA MUNA BAGO KA MAG TIME OUT
                 $responseList->addNode([
-                    'error' => "TIME OUT GUSTO????? TIME IN AYAW??? TIME IN KA MUNA!"
+                    'error' => "You have no active Time IN record. Please time in before timing out."
                 ]);
             } else {
                 // i2 kapag meron time in, no problem na mag time out

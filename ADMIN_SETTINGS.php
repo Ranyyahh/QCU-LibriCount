@@ -289,9 +289,9 @@ try {
                         else echo '#28a745';
                     ?>;">
                         <?php 
-                        if ($percentage >= 90) echo '🔴 Wala na tuloy space, bobo ka kasi eh';
-                        elseif ($percentage >= 70) echo '🟡 Malapit na mapuno, bawasan mo na sila HAHAHAHAH';
-                        else echo '🟢 Daming space ya';
+                        if ($percentage >= 90) echo '🔴 Full';
+                        elseif ($percentage >= 70) echo '🟡 Almost Full';
+                        else echo '🟢 Online';
                         ?>
                     </span></p>
                 </div>
