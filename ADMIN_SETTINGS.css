@@ -294,3 +294,16 @@ box-shadow: 5px 0 5px -3px rgba(0,0,0,0.3);
     background: #8c949d;
     color: white;
 }
+
+.Nav-bar li a.active {
+    background-color: #02369C !important;
+    color: white !important;
+    font-weight: bold !important;
+}
+
+.Nav-bar li:nth-child(3) a {
+    background-color: #02369C !important;
+    color: white !important;
+    font-weight: bold !important;
+  
+}

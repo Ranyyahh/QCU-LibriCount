@@ -1,4 +1,21 @@
 document.addEventListener("DOMContentLoaded", () => {
+    // ============ NAVIGATION HIGHLIGHT ============
+    // Get current page URL
+    const currentPage = window.location.pathname.split('/').pop();
+    
+    // Find all navigation links
+    const navLinks = document.querySelectorAll('.Nav-bar a');
+    
+    // Loop through links and add 'active' class to Dashboard link
+    navLinks.forEach(link => {
+        const linkPage = link.getAttribute('href');
+        if (linkPage === 'ADMIN_DASHBOARD.html') {
+            link.classList.add('active');
+        } else {
+            link.classList.remove('active');
+        }
+    });
+    
     const API_URL = 'get_real_time_data.php'; // Your PHP API file
     
     // Initial load

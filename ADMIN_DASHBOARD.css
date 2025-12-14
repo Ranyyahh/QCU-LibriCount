@@ -282,3 +282,19 @@ box-shadow: 5px 0 5px -3px rgba(0,0,0,0.3);
     font-weight: 700;
     color: white; /* or whatever color you want */
 }
+
+
+
+.Nav-bar li a.active {
+    background-color: #02369C !important;
+    color: white !important;
+    font-weight: bold !important;
+padding: 15px 55px !important;
+}
+
+.Nav-bar li:nth-child(1) a {
+    background-color: #02369C !important;
+    color: white !important;
+    font-weight: bold !important;
+padding: 15px 55px !important;
+}
