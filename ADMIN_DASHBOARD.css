@@ -61,16 +61,15 @@ body {
 
 .Nav-bar {
 display: flex;
-gap: 10px;
-margin: 1px 0;
+gap: 0px;
 }
 
 .Nav-bar ul {
-list-style-type: none;
-padding: 0;
-margin: 0;
-display: flex;
-gap: 10px;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 10px;
 }
 
 
