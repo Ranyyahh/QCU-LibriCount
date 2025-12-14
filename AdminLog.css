@@ -147,7 +147,7 @@ input[type="text"], input[type="password"] {
     position: relative;
     display: flex;
     align-items: center;
-    width: 100%; /* or desired width */
+    width: 93%;
 }
 
 
@@ -165,4 +165,85 @@ input[type="text"], input[type="password"] {
 .password-wrapper .eye:hover {
     opacity: 1;
 }
+
+ .alert {
+                display: none;
+                position: fixed;
+                top: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                padding: 15px 20px;
+                border-radius: 5px;
+                color: white;
+                font-weight: bold;
+                z-index: 1000;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            }
+            
+            .alert.error {
+                background-color: #f44336;
+                border: 1px solid #d32f2f;
+            }
+            
+            .alert.success {
+                background-color: #4CAF50;
+                border: 1px solid #388E3C;
+            }
+            
+            .spinner {
+                display: none;
+                border: 3px solid rgba(255,255,255,0.3);
+                border-radius: 50%;
+                border-top: 3px solid #fff;
+                width: 20px;
+                height: 20px;
+                animation: spin 1s linear infinite;
+                position: absolute;
+                right: 20px;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+            
+            @keyframes spin {
+                0% { transform: translateY(-50%) rotate(0deg); }
+                100% { transform: translateY(-50%) rotate(360deg); }
+            }
+            
+            .login-btn {
+                position: relative;
+            }
+            
+            .login-btn:disabled {
+                opacity: 0.7;
+                cursor: not-allowed;
+            }
+            
+           
+            .eye-toggle {
+                position: absolute;
+                right: 20px;
+                top: 50%;
+                transform: translateY(-50%);
+                cursor: pointer;
+                color: #666;
+                font-size: 18px;
+                transition: color 0.3s;
+                background: none;
+                border: none;
+                padding: 0;
+                z-index: 10;
+            }
+            
+            .eye-toggle:hover {
+                color: #333;
+            }
+            
+       
+            .password-wrapper {
+                position: relative;
+            }
+            
+            .password-wrapper input {
+                padding-right: 40px;
+            }
 

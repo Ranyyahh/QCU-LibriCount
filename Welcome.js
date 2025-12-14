@@ -1,8 +1,8 @@
 document.addEventListener("keydown", function(event) {
     if (event.ctrlKey && event.altKey) {
-        switch(event.key) {
+        switch(event.key.toLowerCase()) {  // Added .toLowerCase() for case-insensitive
             case "a":
-                window.location.href = "AdminLog.html";
+                window.location.href = "Admin_login.php";  // Your merged file
                 break;
             case "s":
                 window.location.href = "StudentLogin.html";
