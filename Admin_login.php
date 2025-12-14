@@ -2,9 +2,9 @@
 session_start();
 require_once 'config.php';
 
-// Handle AJAX request if POST request
+// Handle form submission if POST request
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    header('Content-Type: application/json');
+    // Remove header('Content-Type: application/json'); - NOT JSON anymore
     
     function loginAdmin($username, $password) {
         try {
@@ -47,39 +47,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'] ?? '';
     
     if (empty($username) || empty($password)) {
-        echo json_encode([
-            'success' => false,
-            'message' => '❌ Please enter both username and password!'
-        ]);
-        exit();
-    }
-    
-    $login_result = loginAdmin($username, $password);
-    
-    if ($login_result['success'] === true) {
-        echo json_encode([
-            'success' => true,
-            'message' => '✅ Login successful! Redirecting...',
-            'redirect' => 'ADMIN_DASHBOARD.html'
-        ]);
+        $alert_message = "❌ Please enter both username and password!";
     } else {
-        switch ($login_result['error']) {
-            case 'username':
-                $message = "❌ Username not found!";
-                break;
-            case 'password':
-                $message = "❌ Incorrect password!";
-                break;
-            default:
-                $message = "❌ Invalid username or password!";
-                break;
+        $login_result = loginAdmin($username, $password);
+        
+        if ($login_result['success'] === true) {
+            // IMMEDIATE REDIRECT - no AJAX, no waiting
+            header("Location: ADMIN_DASHBOARD.html");
+            exit();
+        } else {
+            switch ($login_result['error']) {
+                case 'username':
+                    $alert_message = "❌ Username not found!";
+                    break;
+                case 'password':
+                    $alert_message = "❌ Incorrect password!";
+                    break;
+                default:
+                    $alert_message = "❌ Invalid username or password!";
+                    break;
+            }
         }
-        echo json_encode([
-            'success' => false,
-            'message' => $message
-        ]);
     }
-    exit();
 }
 ?>
 
@@ -113,13 +102,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </header>
 
     
-        <div id="alertContainer" class="alert"></div>
+        <?php if (isset($alert_message)): ?>
+        <div id="alertContainer" class="alert error" style="display: block;">
+            <?php echo $alert_message; ?>
+        </div>
+        <?php endif; ?>
 
      
         <section class="admin-login-form">
             <img src="Images/admin-logo.png" alt="login-logo" class="admin-logo">
 
-            <form id="loginForm" method="POST">
+            <!-- Traditional form submission -->
+            <form id="loginForm" method="POST" action="">
                
                <div class="input-wrapper">
                     <img src="Images/username-logo.png" alt="username-logo" class="input-icon">
@@ -137,7 +131,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div>
                     <button type="submit" class="login-btn" id="submitBtn">
                         Login
-                        <div class="spinner" id="submitSpinner"></div>
                     </button>
                 </div>
 
@@ -145,5 +138,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </section>
 
     </body>
-    <script src="AdminLog.js"></script>
+    <script>
+     
+        document.addEventListener('DOMContentLoaded', function() {
+            const eyeToggle = document.getElementById('togglePassword');
+            const pass = document.getElementById('password');
+            const eyeIcon = eyeToggle ? eyeToggle.querySelector('i') : null;
+
+            if (eyeToggle && pass && eyeIcon) {
+                eyeToggle.addEventListener('click', () => {
+                    const isPassword = pass.type === "password";
+                    pass.type = isPassword ? "text" : "password";
+                    
+                    if (isPassword) {
+                        eyeIcon.classList.remove('fa-eye');
+                        eyeIcon.classList.add('fa-eye-slash');
+                    } else {
+                        eyeIcon.classList.remove('fa-eye-slash');
+                        eyeIcon.classList.add('fa-eye');
+                    }
+                });
+                
+                eyeToggle.addEventListener('mousedown', (e) => {
+                    e.preventDefault();
+                });
+            }
+            
+            // Auto-hide alert after 5 seconds
+            const alertContainer = document.getElementById('alertContainer');
+            if (alertContainer && alertContainer.style.display === 'block') {
+                setTimeout(() => {
+                    alertContainer.style.display = 'none';
+                }, 5000);
+            }
+        });
+    </script>
 </html>
