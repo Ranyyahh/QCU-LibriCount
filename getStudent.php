@@ -13,7 +13,36 @@ if ($conn->connect_error) {
     exit();
 }
 
-if(isset($_GET['studentNo']) && !empty($_GET['studentNo'])){
+class Node {
+    public $data;
+    public $next;
+
+    public function __construct($data) {
+        $this->data = $data;
+        $this->next = null;
+    }
+}
+//student linked list
+class Student {
+    public $head = null;
+
+    public function addNode($data) {
+        $newNode = new Node($data);
+
+        if ($this->head === null) {
+            $this->head = $newNode;
+        } else {
+            $current = $this->head;
+            while ($current->next !== null) {
+                $current = $current->next;
+            }
+            $current->next = $newNode;
+        }
+    }
+}
+
+if (isset($_GET['studentNo']) && !empty($_GET['studentNo'])) {
+
     $studentNo = $conn->real_escape_string($_GET['studentNo']);
 
     $sql = "SELECT 
@@ -24,31 +53,39 @@ if(isset($_GET['studentNo']) && !empty($_GET['studentNo'])){
                 year_level AS yearLvl,
                 student_number
             FROM students";
-    
+
     $result = $conn->query($sql);
 
-    if($result->num_rows > 0){
-        $studentFound = null;
+    if ($result->num_rows > 0) {
 
-    
-        while($row = $result->fetch_assoc()){
-            if($row['student_number'] === $studentNo){
-                $studentFound = [
-                    "firstName" => $row['firstName'],
-                    "middleName" => $row['middleName'],
-                    "lastName" => $row['lastName'],
-                    "course" => $row['course'],
-                    "yearLvl" => $row['yearLvl']
-                ];
-                break; 
-            }
+        $studentList = new Student();
+        while ($row = $result->fetch_assoc()) {
+            $studentList->addNode($row);
         }
 
-        if($studentFound){
+        $studentFound = null;
+        $current = $studentList->head;
+
+        while ($current !== null) {
+            if ($current->data['student_number'] === $studentNo) {
+                $studentFound = [
+                    "firstName" => $current->data['firstName'],
+                    "middleName" => $current->data['middleName'],
+                    "lastName" => $current->data['lastName'],
+                    "course" => $current->data['course'],
+                    "yearLvl" => $current->data['yearLvl']
+                ];
+                break;
+            }
+            $current = $current->next;
+        }
+
+        if ($studentFound) {
             echo json_encode($studentFound);
         } else {
             echo json_encode(["error" => "Student not found"]);
         }
+
     } else {
         echo json_encode(["error" => "No students in the database"]);
     }
