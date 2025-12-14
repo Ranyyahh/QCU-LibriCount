@@ -106,7 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <ul>
                 <li><a href="ADMIN_DASHBOARD.html">Dashboard</a></li>
                 <li><a href="ADMIN_LOGS.html">Logs</a></li>
-                <li><a href="ADMIN_SETTINGS.php">Settings</a></li>
+                <li><a href= "ADMIN_SETTINGS.php">Settings</a></li>
             </ul>
         </nav>
     </div>

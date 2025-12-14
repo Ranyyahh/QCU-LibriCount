@@ -33,9 +33,7 @@ body {
     overflow: hidden;
 }
 
-/* ======================================
-   HEADER
-====================================== */
+
 .header {
     display: flex;
     align-items: center;
