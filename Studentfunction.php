@@ -1,6 +1,9 @@
 <?php
 header('Content-Type: application/json');
 
+// SET TIMEZONE FIRST
+date_default_timezone_set('Asia/Manila');  // For Philippines time kahapon kasi naka ano eh UTC Timezone
+
 // Database connection
 $servername = "localhost";
 $username = "root";
