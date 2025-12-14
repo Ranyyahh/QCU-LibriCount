@@ -383,6 +383,34 @@ try {
             });
         }
     });
+
+    function updateDateTime() {
+    const now = new Date();
+    
+    const options = {
+        timeZone: 'Asia/Manila',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true
+    };
+    
+
+    const formattedDate = now.toLocaleString('en-US', options);
+    
+    const datetimeElement = document.getElementById('datetime');
+    if (datetimeElement) {
+        datetimeElement.textContent = `As of ${formattedDate}`;
+    }
+}
+
+
+updateDateTime();
+
+setInterval(updateDateTime, 1000);
     </script>
 </body>
 </html>
