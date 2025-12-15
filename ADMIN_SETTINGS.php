@@ -291,7 +291,7 @@ try {
                         <?php 
                         if ($percentage >= 90) echo '🔴 Full';
                         elseif ($percentage >= 70) echo '🟡 Almost Full';
-                        else echo '🟢 Online';
+                        else echo '🟢 Normal';
                         ?>
                     </span></p>
                 </div>
@@ -413,4 +413,5 @@ updateDateTime();
 setInterval(updateDateTime, 1000);
     </script>
 </body>
+
 </html>
