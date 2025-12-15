@@ -177,9 +177,9 @@ header {
     position: absolute;
     font-size: 25px;
     color: #131416;
-    font-weight: 400; /* Regular */
-    bottom: 180px;
-    left: 470px;
+    font-weight: 800; /* Regular */
+    bottom: 250px;
+    left: 485px;
 }
 
 .inner-circle {
