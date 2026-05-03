@@ -6,40 +6,39 @@ require_once 'config.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header('Content-Type: application/json');
     
+    //converted for oracle database
     function loginAdmin($username, $password) {
         try {
-            $pdo = getDBConnection();
-            
-            $stmt = $pdo->prepare("SELECT admin_id, username, password FROM admin WHERE username = ?");
-            
-            if (!$stmt) {
-                throw new Exception("Failed to prepare SQL statement");
-            }
-            
-            $stmt->execute([$username]);
-            $admin = $stmt->fetch();
-            
-            if ($admin) {
-                if ($password === $admin['password']) {
-                    $_SESSION['admin_id'] = $admin['admin_id'];
-                    $_SESSION['username'] = $admin['username'];
-                    $_SESSION['admin_logged_in'] = true;
-                    
-                    session_regenerate_id(true);
-                    return ['success' => true];
-                } else {
-                    return ['success' => false, 'error' => 'password'];
-                }
-            } else {
-                return ['success' => false, 'error' => 'username'];
-            }
-            
-        } catch(PDOException $e) {
-            error_log("Database error in loginAdmin: " . $e->getMessage());
+
+        $conn = getDBConnection();
+
+        $sql = "BEGIN admin_login(:u, :p, :r); END;";
+        $stmt = oci_parse($conn, $sql);
+
+        oci_bind_by_name($stmt,":u", $username);
+        oci_bind_by_name($stmt,":p", $password);
+
+        $result = 0;
+
+        oci_bind_by_name($stmt,":r", $result, 32);
+
+        oci_execute($stmt);
+
+        if ($result == 1) {
+            $_SESSION['admin_id'] = $username;
+            $_SESSION['username'] = $username;
+            $_SESSION['admin_logged_in'] = true;
+
+            session_regenerate_id(true);
+
+            return ['success' => true];
+        } else {
+            return ['success' => false, 'error' => 'invalid'];
+        }
+
+        } catch (Exception $e) {
+            error_log($e->getMessage());
             return ['success' => false, 'error' => 'database'];
-        } catch(Exception $e) {
-            error_log("General error in loginAdmin: " . $e->getMessage());
-            return ['success' => false, 'error' => 'general'];
         }
     }
 
