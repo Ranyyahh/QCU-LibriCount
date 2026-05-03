@@ -1,25 +1,27 @@
 <?php
+// config.php - Oracle PL/SQL version for QCU LibriCount
 
-define ('DB_HOST', 'localhost');
-define ('DB_USER', 'root');
-define ('DB_PASS', ''); 
-define ('DB_NAME', 'qculibricount');
+// Oracle database credentials
+define('DB_USER', 'libri_user');        // Palitan ng actual username ninyo sa Oracle
+define('DB_PASS', 'libri_pass');        // Palitan ng actual password
+define('DB_HOST', 'localhost');         // or 192.168.x.x (IP ng Oracle server)
+define('DB_PORT', '1521');              // Default port ng Oracle
+define('DB_SERVICE', 'XE');             // or 'ORCL' depende sa Oracle setup ninyo
 
+// Connection string
 function getDBConnection() {
-    try {
-        $pdo = new PDO(
-            "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=utf8mb4",
-            DB_USER,
-            DB_PASS,
-            [
-                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-                PDO::ATTR_EMULATE_PREPARES => false
-            ]
-        );
-        return $pdo;
-    } catch(PDOException $e) {
-        die("Connection failed: " . $e->getMessage());
+    $conn_string = "(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=" . DB_HOST . ")(PORT=" . DB_PORT . "))(CONNECT_DATA=(SERVICE_NAME=" . DB_SERVICE . ")))";
+    
+    $conn = oci_connect(DB_USER, DB_PASS, $conn_string, 'AL32UTF8');
+    
+    if (!$conn) {
+        $e = oci_error();
+        die("Connection failed: " . $e['message']);
     }
+    
+    return $conn;
 }
+
+// Para magamit sa buong system
+$conn = getDBConnection();
 ?>
